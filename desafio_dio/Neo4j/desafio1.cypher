@@ -140,16 +140,14 @@ MATCH (a:Person {name: "Zendaya"})
 MATCH (s:Series {title: "Dune: Part Two"})
 MERGE (a)-[:ACTED_IN]->(s);
 
+
+
 //usuarios avaliaram filmes e series
-MATCH (u:User {username: "cinefan_br"})
-MATCH (m:Movie {title: "Oppenheimer"})
-MERGE (u)-[:RATED {rating: 9.5, review: "Um filme incrível que mistura história e emoção de forma magistral."}]->(m);
-MATCH (u:User {username: "maratonista99"})
-MATCH (s:Series {title: "The Last of Us"})   
-MERGE (u)-[:RATED {rating: 9.0, review: "Uma série envolvente com personagens profundos e uma trama emocionante."}]->(s);
-MATCH (u:User {username: "scifi_louca"})
-MATCH (s:Series {title: "Andor"})
-MERGE (u)-[:RATED {rating: 8.5, review: "Uma adição fantástica ao universo Star Wars, com uma narrativa sombria e cativante."}]->(s);
-MATCH (u:User {username: "barbiecore"})
-MATCH (m:Movie {title: "Barbie"})
-MERGE (u)-[:RATED {rating: 7.5, review: "Um filme divertido e visualmente deslumbrante que celebra a cultura pop."}]->(m);
+MATCH (u:User {username: "nolan_addicted"}), (m:Movie {title: "Oppenheimer"})
+CREATE (u)-[:WATCHED {rating: 9.5, when: "2024-01"}]->(m);
+
+MATCH (u:User {username: "barbiecore"}), (m:Movie {title: "Barbie"})
+CREATE (u)-[:WATCHED {rating: 9.0, when: "2023-07"}]->(m);
+
+MATCH (u:User {username: "scifi_louca"}), (m:Movie {title: "Dune: Part Two"}), (s:Series {title: "Silo"})
+CREATE (u)-[:WATCHED {rating: 8.8}]->(m), (u)-[:WATCHED {rating: 8.4}]->(s);
